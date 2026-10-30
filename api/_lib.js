@@ -1,6 +1,6 @@
 const { neon } = require('@neondatabase/serverless');
 const jwt = require('jsonwebtoken');
-const sql = neon(process.env.DATABASE_URL);
+const sql = neon(process.env.DATABASE_URL || process.env.POSTGRES_URL || process.env.POSTGRES_URL_NON_POOLING);
 let ready;
 function init() {
   if (!ready) ready = (async () => {
