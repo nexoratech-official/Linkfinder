@@ -3,13 +3,15 @@ const { sql, init, jwt } = require('./_lib');
 module.exports = async (req, res) => {
   if (req.method !== 'POST') return res.status(405).end();
   try {
-    await init();
     const { username = '', password = '' } = req.body || {};
     const sign = (p) => jwt.sign(p, process.env.JWT_SECRET, { expiresIn: '12h' });
-    if (username === (process.env.ADMIN_USERNAME || '').trim() && password === (process.env.ADMIN_PASSWORD || '').trim()) {
-      const user = { role: 'admin', name: 'Admin', username };
+    const au = (process.env.ADMIN_USERNAME || '').trim();
+    const ap = (process.env.ADMIN_PASSWORD || '').trim();
+    if (au && username.trim() === au && password === ap) {
+      const user = { role: 'admin', name: 'Admin', username: au };
       return res.json({ token: sign(user), user });
     }
+    await init();
     const rows = await sql`SELECT * FROM users WHERE username = ${username.trim().toLowerCase()}`;
     const u = rows[0];
     if (!u || !(await bcrypt.compare(password, u.password_hash)))
