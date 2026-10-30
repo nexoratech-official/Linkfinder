@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
     await init();
     const { username = '', password = '' } = req.body || {};
     const sign = (p) => jwt.sign(p, process.env.JWT_SECRET, { expiresIn: '12h' });
-    if (username === process.env.ADMIN_USERNAME && password === process.env.ADMIN_PASSWORD) {
+    if (username === (process.env.ADMIN_USERNAME || '').trim() && password === (process.env.ADMIN_PASSWORD || '').trim()) {
       const user = { role: 'admin', name: 'Admin', username };
       return res.json({ token: sign(user), user });
     }
