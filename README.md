@@ -1,5 +1,13 @@
-# College Link Finder – Deploy on Vercel
-1. Push this folder to GitHub, then Vercel > Add New > Project > import it (Framework: Other).
-2. Vercel project > Storage > add a **Neon Postgres** database (connect it to the project). This sets DATABASE_URL.
-3. Project > Settings > Environment Variables, add: JWT_SECRET, ADMIN_USERNAME, ADMIN_PASSWORD (see .env.example).
-4. Deploy. Login as admin, open "Manage Faculty", create faculty logins. Tables are created automatically.
+# College Link Finder
+
+## Run on your computer
+1. Copy .env.example to .env and fill in the 4 values (DATABASE_URL from neon.tech).
+2. npm install
+3. npm start      (open http://localhost:3000)
+
+## Deploy on Vercel
+1. Push to GitHub, import in Vercel (Framework: Other).
+2. Add the same 4 values under Settings > Environment Variables.
+3. Deploy.
+
+Admin login = ADMIN_USERNAME / ADMIN_PASSWORD. Admin creates faculty logins in the Faculty tab.

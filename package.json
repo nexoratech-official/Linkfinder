@@ -2,6 +2,7 @@
   "name": "college-link-finder",
   "version": "1.0.0",
   "private": true,
+  "scripts": { "start": "node server.js" },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.0",
     "bcryptjs": "^2.4.3",
